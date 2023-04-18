@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weather -application</title>
+  <!--this script for icon from fontawesome-->
+  <script src="https://kit.fontawesome.com/c1dde787c5.js" crossorigin="anonymous"></script>
+  <!--this is a external CSS included -->
+ <link rel="stylesheet" href="css/Weather.css">
+</head>
+<body >
+  <div class="container">
+    <!--Weather-box that contains all the elements -->
+    <div class="Weather-box">
+      <!--search box where user can search city-->
+      <div class="search-box">
+        <input type="text" id="search"  placeholder="Search by city name">
+        <button id="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <!--when user enter incorrect city name then this will display -->
+      <div class="msg">
+         <p>Please enter correct city name</p>
+      </div>
+      <!--this section for weather information -->
+      <div class="weather-temp">
+        <img class="weather-png" src="" alt="">
+        <h1 class="temp"></h1>
+        <h4 id="city"></h4>
+      </div>
+      <div class="weather-info">
+        <div class="weather-info-left">
+          <i class="fa-sharp fa-solid fa-water"></i>
+          <div>
+            <h6 class="humidity"></h6>
+            <p>Humidity</p>
+          </div>
+        </div>
+        <div class="weather-info-right">
+          <i class="fa-sharp fa-solid fa-wind"></i>
+          <div>
+            <h6 class="wind"></h6>
+            <p>wind speed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+<!--this is a javascript that includes internally -->
+<script >
+// Define the API URL and API key for OpenWeatherMap
+  const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+  const apiKey = "&appid=0582767a0a4c9e0e42b05e72cbe2dbfd";
+// this city name will entered by user
+  const city_name = document.getElementById('search');
+// when page load this city name will show (by default )
+  const defaultCity = 'Kamargaon';
+// Define an asynchronous function to fetch the weather data and update the UI
+async function Weather(city){
+  let response = await fetch(apiUrl+city+apiKey);
+// if the city name will incorrect then this block will be execute
+  if(response.status == 404){
+    document.querySelector('.msg p').style.display = "block";
+    }
+// otherwise, update the UI with the weather data
+  else{
+  document.querySelector('.msg p').style.display = "none";
+  let data = await response.json();
+  // here image will change based on condition 
+  const img = document.querySelector('.weather-png')
+  if (data.weather[0].main == 'Clouds') {
+    img.src = 'images/Clouds.png';
+  }else if(data.weather[0].main == 'Clear'){
+    img.src = 'images/clear.png';
+  }else if(data.weather[0].main == 'Drizzle'){
+    img.src = 'images/drizzle.png';
+  }else if(data.weather[0].main == 'Mist'){
+    img.src = 'images/mist.png';
+  }
+  // here the data will display 
+  document.querySelector('#city').innerHTML =data.name;
+  document.querySelector('.temp').innerHTML =Math.round(data.main.temp) + "°c";
+  document.querySelector('.humidity').innerHTML =data.main.humidity + "%";
+  document.querySelector('.wind').innerHTML =data.wind.speed + "%";
+}
+}
+// calling a function with by default argument
+Weather(defaultCity);
+// here function is call with users input city name when button will click
+let btn = document.getElementById('btn');
+btn.addEventListener('click', ()=>{
+  Weather(city_name.value);
+})
+</script>
+</html>
