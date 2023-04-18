@@ -8,7 +8,7 @@
   <!--this script for icon from fontawesome-->
   <script src="https://kit.fontawesome.com/c1dde787c5.js" crossorigin="anonymous"></script>
   <!--this is a external CSS included -->
- <link rel="stylesheet" href="css/Weather.css">
+ <link rel="stylesheet" href="Weather.css">
 </head>
 <body >
   <div class="container">
@@ -72,13 +72,13 @@ async function Weather(city){
   // here image will change based on condition 
   const img = document.querySelector('.weather-png')
   if (data.weather[0].main == 'Clouds') {
-    img.src = 'images/Clouds.png';
+    img.src = 'Clouds.png';
   }else if(data.weather[0].main == 'Clear'){
-    img.src = 'images/clear.png';
+    img.src = 'clear.png';
   }else if(data.weather[0].main == 'Drizzle'){
-    img.src = 'images/drizzle.png';
+    img.src = 'drizzle.png';
   }else if(data.weather[0].main == 'Mist'){
-    img.src = 'images/mist.png';
+    img.src = 'mist.png';
   }
   // here the data will display 
   document.querySelector('#city').innerHTML =data.name;
