@@ -97,5 +97,9 @@ p{
   border: 0;
   background: #fff;
 }
-
+@media screen and (min-width : 800px){
+.container{
+width: 40%;
+}
+}
 
