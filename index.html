@@ -71,15 +71,7 @@ async function Weather(city){
   let data = await response.json();
   // here image will change based on condition 
   const img = document.querySelector('.weather-png')
-  if (data.weather[0].main == 'Clouds') {
-    img.src = 'Clouds.png';
-  }else if(data.weather[0].main == 'Clear'){
-    img.src = 'clear.png';
-  }else if(data.weather[0].main == 'Drizzle'){
-    img.src = 'drizzle.png';
-  }else if(data.weather[0].main == 'Mist'){
-    img.src = 'mist.png';
-  }
+ img.src = ` https://openweathermap.org/img/wn/${data.main[0].icon}@2x.png`
   // here the data will display 
   document.querySelector('#city').innerHTML =data.name;
   document.querySelector('.temp').innerHTML =Math.round(data.main.temp) + "°c";
