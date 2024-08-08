@@ -71,7 +71,7 @@ async function Weather(city){
   let data = await response.json();
   // here image will change based on condition 
   const img = document.querySelector('.weather-png')
- img.src = ` https://openweathermap.org/img/wn/${data.main[0].icon}@2x.png`
+ img.src = ` https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
   // here the data will display 
   document.querySelector('#city').innerHTML =data.name;
   document.querySelector('.temp').innerHTML =Math.round(data.main.temp) + "°c";
