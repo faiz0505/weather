@@ -98,8 +98,9 @@ p{
   background: #fff;
 }
 @media screen and (min-width : 800px){
-.container{
-width: 40%;
+.Weather-box{
+  height: 50%;
+    width: 35%;
 }
 }
 
